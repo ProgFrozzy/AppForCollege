@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static sample.Main;
 
 namespace sample
 {
@@ -19,6 +20,7 @@ namespace sample
         public WorkWithTables()
         {
             InitializeComponent();
+            getDataFromTable();
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
@@ -30,9 +32,11 @@ namespace sample
 
         private void getDataFromTable()
         {
+            ChangingTable name = new ChangingTable();
+
             DataBaseConnection.Open();
 
-            SqlCommand getDataFromTable = new SqlCommand("SELECT * FROM objects_View", DataBaseConnection);
+            SqlCommand getDataFromTable = new SqlCommand($"SELECT * FROM {name.sNameChangingTable}", DataBaseConnection);
 
             //В классее sqlCommand есть метод executeReader, а sqlDataReader позволяет нам читать сразу несколько столбцов
             SqlDataReader sqlDataReader = getDataFromTable.ExecuteReader();

@@ -13,6 +13,15 @@ namespace sample
 {
     public partial class Main : Form
     {
+        public class ChangingTable
+        {
+            public string sNameChangingTable
+            {
+                set { sNameChangingTable = value; }
+                get { return sNameChangingTable; }
+            }
+        }
+
         const string DataBasePath = "Data Source=DESKTOP-VMLJJ4E\\SQLEXPRESS;Initial Catalog=device;Integrated Security=True;TrustServerCertificate=true";
         SqlConnection DataBaseConnection = new SqlConnection(DataBasePath);
         

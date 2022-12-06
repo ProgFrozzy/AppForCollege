@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static sample.Main;
 
 namespace sample
 {
@@ -24,24 +25,25 @@ namespace sample
 
         private void loadItemsComboBoxTables()
         {
-            string getDataFromDB;
-            SqlCommand sqlCommand;
-            SqlDataReader readDataBase;
+            string sName;
+
             DataBaseConnection.Open();
 
-            getDataFromDB = $"SELECT name FROM sys.objects WHERE type in (N'U')";
+            string getDataFromDB = "SELECT name FROM sys.objects WHERE type in ('U')";
 
-            //Создание экземпляра для получение таблицы
-            sqlCommand = new SqlCommand(getDataFromDB, DataBaseConnection);
+            SqlCommand sqlCommand = new SqlCommand(getDataFromDB, DataBaseConnection);
 
-            readDataBase = sqlCommand.ExecuteReader();
+            SqlDataReader readDataBase = sqlCommand.ExecuteReader();
 
             //Читаем данные из всех столбцов
             while (readDataBase.Read())
             {
-                comboBoxTables.Items.Add(readDataBase[0].ToString());
+                sName = readDataBase.GetString(0);
+                comboBoxTables.Items.Add(sName.ToString());
             }
             readDataBase.Close();
+
+            DataBaseConnection.Close();
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
@@ -53,7 +55,12 @@ namespace sample
 
         private void buttonChoise_Click(object sender, EventArgs e)
         {
+            ChangingTable name = new ChangingTable();
 
+            if (comboBoxTables.Text.Length > 0)
+            {
+                name.sNameChangingTable = comboBoxTables.Text;
+            }
         }
     }
 }
