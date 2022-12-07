@@ -58,6 +58,7 @@ namespace sample
             while (readDataBase.Read())
             {
                 comboBoxOS.Items.Add(readDataBase[0].ToString());
+                MessageBox.Show(readDataBase[0].ToString());
             }
             readDataBase.Close();
             #endregion

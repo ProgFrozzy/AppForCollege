@@ -36,7 +36,7 @@
             // buttonChoise
             // 
             this.buttonChoise.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
-            this.buttonChoise.Location = new System.Drawing.Point(12, 52);
+            this.buttonChoise.Location = new System.Drawing.Point(12, 57);
             this.buttonChoise.Name = "buttonChoise";
             this.buttonChoise.Size = new System.Drawing.Size(130, 40);
             this.buttonChoise.TabIndex = 0;
@@ -47,7 +47,7 @@
             // buttonExit
             // 
             this.buttonExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
-            this.buttonExit.Location = new System.Drawing.Point(12, 98);
+            this.buttonExit.Location = new System.Drawing.Point(12, 103);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(130, 40);
             this.buttonExit.TabIndex = 0;
@@ -57,11 +57,11 @@
             // 
             // comboBoxTables
             // 
-            this.comboBoxTables.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.comboBoxTables.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
             this.comboBoxTables.FormattingEnabled = true;
             this.comboBoxTables.Location = new System.Drawing.Point(12, 12);
             this.comboBoxTables.Name = "comboBoxTables";
-            this.comboBoxTables.Size = new System.Drawing.Size(150, 34);
+            this.comboBoxTables.Size = new System.Drawing.Size(130, 39);
             this.comboBoxTables.TabIndex = 1;
             // 
             // ChoiseTableWhichChange

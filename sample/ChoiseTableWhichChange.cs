@@ -29,21 +29,32 @@ namespace sample
 
             DataBaseConnection.Open();
 
-            string getDataFromDB = "SELECT name FROM sys.objects WHERE type in ('U')";
+            string getDataFromDB = "SELECT name FROM sys.objects WHERE type in (N'U')";
 
             SqlCommand sqlCommand = new SqlCommand(getDataFromDB, DataBaseConnection);
 
             SqlDataReader readDataBase = sqlCommand.ExecuteReader();
 
+            List<string> list = new List<string>();
+
             //Читаем данные из всех столбцов
             while (readDataBase.Read())
             {
                 sName = readDataBase.GetString(0);
-                comboBoxTables.Items.Add(sName.ToString());
+                //MessageBox.Show(sName.ToString());
+                //comboBoxTables.Items.Add(sName);
+                list.Add(sName.ToString());
             }
             readDataBase.Close();
 
             DataBaseConnection.Close();
+
+            foreach (string s in list)
+            {
+                MessageBox.Show(s);
+                sName = s;
+                comboBoxTables.Items.Add(sName);
+            }
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
