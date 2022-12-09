@@ -5,23 +5,27 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static sample.Main;
 
 namespace sample
 {
     public partial class ChoiseTableWhichChange : Form
-    {
+    {        
+
         const string DataBasePath = "Data Source=DESKTOP-VMLJJ4E\\SQLEXPRESS;Initial Catalog=device;Integrated Security=True;TrustServerCertificate=true";
         SqlConnection DataBaseConnection = new SqlConnection(DataBasePath);
 
         public ChoiseTableWhichChange()
         {
-            loadItemsComboBoxTables();
             InitializeComponent();
+            loadItemsComboBoxTables();
         }
+
 
         private void loadItemsComboBoxTables()
         {
@@ -31,30 +35,21 @@ namespace sample
 
             string getDataFromDB = "SELECT name FROM sys.objects WHERE type in (N'U')";
 
-            SqlCommand sqlCommand = new SqlCommand(getDataFromDB, DataBaseConnection);
+            SqlCommand sqlCommand = new SqlCommand("SELECT name FROM sys.objects WHERE type in (N'U')", DataBaseConnection);
 
             SqlDataReader readDataBase = sqlCommand.ExecuteReader();
 
-            List<string> list = new List<string>();
-
+            List<string[]> list = new List<string[]>();
             //Читаем данные из всех столбцов
             while (readDataBase.Read())
             {
                 sName = readDataBase.GetString(0);
-                //MessageBox.Show(sName.ToString());
-                //comboBoxTables.Items.Add(sName);
-                list.Add(sName.ToString());
+                list.Add(new string[1]);
+                comboBoxTables.Items.Add(sName);
             }
             readDataBase.Close();
 
             DataBaseConnection.Close();
-
-            foreach (string s in list)
-            {
-                MessageBox.Show(s);
-                sName = s;
-                comboBoxTables.Items.Add(sName);
-            }
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
@@ -70,8 +65,13 @@ namespace sample
 
             if (comboBoxTables.Text.Length > 0)
             {
-                name.sNameChangingTable = comboBoxTables.Text;
+                name.sNameTable = comboBoxTables.Text;
+                goto l;
             }
+            l:
+            WorkWithTables OpeningForm = new WorkWithTables();
+            OpeningForm.Show();
+            this.Hide();
         }
     }
 }
