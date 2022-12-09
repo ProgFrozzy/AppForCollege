@@ -63,12 +63,8 @@ namespace sample
         {
             ChangingTable name = new ChangingTable();
 
-            if (comboBoxTables.Text.Length > 0)
-            {
-                name.sNameTable = comboBoxTables.Text;
-                goto l;
-            }
-            l:
+            name.sNameTable = comboBoxTables.Text;
+
             WorkWithTables OpeningForm = new WorkWithTables();
             OpeningForm.Show();
             this.Hide();
